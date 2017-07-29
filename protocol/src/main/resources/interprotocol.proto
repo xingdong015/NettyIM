@@ -1,0 +1,32 @@
+syntax="proto2";
+option java_package = "protocol.generate.internal";
+option java_outer_classname = "InterProtocol";
+
+
+enum Dest{
+    client=1;
+    authentication=2;
+    buslogin=3;
+    reactor=4;
+}
+
+
+//服务内部转换协议
+message GTransfer{
+    required Dest dest = 1;
+    optional uint64 netId = 2;
+    required string userId = 3;
+    required uint32 ptoNum = 4;
+    required bytes msg = 5;
+}
+
+//各个服务间建立连接的时候发送的握手协议
+message Greet{
+    enum From{
+        buslogin = 1;
+        reactor=2;
+        authentication=3;
+    }
+
+    required From from = 1;
+}

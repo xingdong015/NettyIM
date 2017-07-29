@@ -1,0 +1,25 @@
+syntax="proto2";
+option java_package = "protocol.generate.chat";
+option java_outer_classname = "Chat";
+
+
+message CPrivateChat{
+    required string self = 1;
+    required string dest = 2;
+    required string content = 3;
+}
+
+message SPrivateChat{
+    required string content = 1;
+}
+
+/*
+code：
+200 -- ok
+404 -- error
+300 -- dumplicated registery
+*/
+message SResponse {
+    required int32 code = 1;		    //返回码
+    required string desc = 2;			//描述
+}
