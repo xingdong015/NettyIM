@@ -6,9 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.Utils;
 import protobuf.analysis.ParseMap;
+import protobuf.generate.cli2srv.auth.Auth;
 import protocol.generate.chat.Chat;
 import protocol.generate.internal.InterProtocol;
 import reactor.util.ClientConnection;
+import reactor.util.ClientConnectionMap;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -72,5 +74,18 @@ public class ClientMessage {
 
     }
 
+
+    public static void transfer2Auth(Message message,ClientConnection connection){
+        ByteBuf byteBuf = null;
+        if(message instanceof Auth.CLogin){
+            String userId = ((Auth.CLogin)message).getUserid();
+
+            byteBuf = Utils.pack2Server(message,ParseMap.getPtoNum(message),connection.get_netId(),InterProtocol.Dest.authentication,userId);
+
+            ClientConnectionMap.registerUserid(userId,connection.get_netId());
+        }
+
+
+    }
 
 }

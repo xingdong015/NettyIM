@@ -14,6 +14,5 @@ public class RedisOperator {
 
     private static final Logger log = LoggerFactory.getLogger(RedisOperator.class);
 
-
     //单个数据库的读取和写入目前可以调用hset和hget
 }

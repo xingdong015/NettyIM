@@ -14,6 +14,7 @@
         <module>buslogic</module>
         <module>reactor</module>
         <module>protocol</module>
+        <module>thirdparty</module>
     </modules>
 
     <properties>
